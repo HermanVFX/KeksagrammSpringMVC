@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Keksagramm</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+  <link rel="icon" href="data:,">
+
+  <meta name="viewport" content="width=device-width">
+</head>
+<body>
+<div class="new-user">
+  <form th:method="POST" th:action="@{/edit/{id}(id=${user.getId()})}" th:object="${user}">
+
+    <label for="addUsername">
+      <span>Username</span>
+      <input type="text" th:field="*{username}" id="addUsername" th:value="${username}"/>
+    </label>
+
+    <label for="addFirstName">
+      <span>First name</span>
+      <input type="text" th:field="*{firstName}" id="addFirstName" th:value="${firstName}"/>
+    </label>
+
+    <label for="addLastName">
+      <span>Last name</span>
+      <input type="text" th:field="*{lastName}" id="addLastName" th:value="${lastName}"/>
+    </label>
+
+    <label for="addEMail">
+      <span>E-Mail</span>
+      <input type="email" th:field="*{eMail}" id="addEMail" th:value="${eMail}"/>
+    </label>
+
+    <button type="submit">Add</button>
+  </form>
+</div>
+
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Keksagramm</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link rel="icon" href="data:,">
+
+    <meta name="viewport" content="width=device-width">
+</head>
+<body>
+
+<div class="user-list">
+    <div class="user-page">
+        <div class="user-page__header">
+            <p class="_username" th:text="${user.getUsername()}">user</p>
+            <div>
+                <div>
+                    <p class="user-page__header-count" th:text="${user.photos.size()}"></p>
+                    <p>Photos</p>
+                </div>
+                <img
+                        width="73px"
+                        height="73px"
+                        th:src="${user.getAvatar() ne null} ? @{/img/avatar/{avatar}(avatar=${user.getAvatar()})} : 'img/avatar/avatar_man_default.png'"
+                />
+                <div>
+                    <p class="user-page__header-count" th:text="${user.posts.size()}"></p>
+                    <p>Posts</p>
+                </div>
+            </div>
+
+            <p class="_name" th:text="${user.getFirstName()} + ' ' + ${user.getLastName()}">username</p>
+        </div>
+
+        <div class="user_radio_block">
+            <div>
+                <input type="radio" id="userPostBlockBtn"
+                       name="user" value="post"
+                       onchange="userPageSelector();"
+                       class="user-btn">
+                <label for="userPostBlockBtn">Post</label>
+            </div>
+            <div>
+                <input type="radio" id="userPhotoBlockBtn"
+                       name="user" value="photo" checked
+                       onchange="userPageSelector();"
+                       class="user-btn">
+                <label for="userPhotoBlockBtn">Photo</label>
+            </div>
+
+        </div>
+
+        <div class="post-grid isHidden" id="userPostBlock">
+            <div th:each="post : ${user.getPosts()}">
+                <p class="post-grid__head" th:text="${post.getPostHead}">posthead</p>
+                <p class="post-grid__text" th:text="${post.getPostText}">posttext</p>
+                <p class="post-grid__date" th:text="${#dates.format(post.getDate, 'dd MMM yyyy HH:mm')}">postdate</p>
+            </div>
+        </div>
+
+        <div class="image-grid" id="userPhotoBlock">
+            <div th:each="photo : ${user.getPhotos()}">
+                <img th:src="@{/img/photos/{photo}(photo=${photo.getUrl()})}"/>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>

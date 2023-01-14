@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Keksagramm</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link rel="icon" href="data:,">
+
+    <meta name="viewport" content="width=device-width">
+</head>
+<body>
+
+<div class="user-list">
+    <h1>users</h1>
+
+    <div class="user-block" th:each="post : ${posts}">
+        <p th:text="${post.getPostHead()}">header</p>
+<!--        <a th:href="@{/{id}(id=${post.getUserId()})}">user</a>-->
+
+    </div>
+
+</div>
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Keksagramm</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link rel="icon" href="data:,">
+
+    <meta name="viewport" content="width=device-width">
+</head>
+<body>
+
+<div class="user-list">
+    <h1>users</h1>
+<!--    <div class="main-menu">-->
+<!--        <ul>-->
+<!--            <li>-->
+<!--                <a href="/home">News</a>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--                <a href="/">Users</a>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--                <a href="/photos">Photos</a>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--                <a href="/photos">Photos</a>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--                <a href="/photos">Photos</a>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--                <a href="/photos">Photos</a>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
+
+    <a href="/new">Add user</a>
+
+    <div class="user-block" th:each="user : ${users}">
+        <a th:href="@{/{id}(id=${user.getId()})}">
+            <img
+                    width="40px"
+                    height="40px"
+                    th:src="${user.getAvatar() ne null} ? @{/img/avatar/{avatar}(avatar=${user.getAvatar()})} : 'img/avatar/avatar_man_default.png'"
+            />
+            <div class="user-aside">
+                <p class="username" th:text="${user.getUsername}">username</p>
+                <p th:text="${user.getFirstName} + ' ' + ${user.getLastName}">username</p>
+            </div>
+        </a>
+        <a th:href="@{/edit/{id}(id=${user.getId()})}">edit</a>
+    </div>
+
+</div>
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>
