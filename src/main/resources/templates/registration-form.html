@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Keksagramm</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link rel="preload" href="fonts/open-sans-300.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/open-sans-600.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/open-sans-700.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/open-sans-800.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/open-sans-regular.woff2" as="font" type="font/woff2" crossorigin>
+</head>
+<body class="page-body">
+
+<!-- Шапка сайта -->
+
+<header class="page-body__header header">
+    <div class="header__wrapper">
+        <div class="header__company">
+            <p>Keksa<span>gramm</span></p>
+        </div>
+        <div class="header__logo">
+            <img src="img/ui/logo.png" alt="logotype" width="68" height="68">
+        </div>
+    </div>
+</header>
+<main class="page-body__main main">
+    <div class="login-block login-block--registration">
+        <div class="login-block__form">
+            <p>Войдите в свой профиль</p>
+            <form
+                    th:method="POST"
+                    th:action="@{/registration}"
+                    id="registrationForm"
+            >
+
+                <label for="registrationUsername">
+                    <span>Username</span>
+                    <input
+                            type="text"
+                            name="username"
+                            id="registrationUsername"
+                    />
+                </label>
+
+
+                <label for="registrationPassword">
+                    <span>Password</span>
+                    <input
+                            type="password"
+                            name="password"
+                            id="registrationPassword"
+                    />
+                </label>
+
+                <label for="registrationPasswordConfirm">
+                    <span>Password confirm</span>
+                    <input
+                            type="password"
+                            name="confirm"
+                            id="registrationPasswordConfirm"
+                    />
+                </label>
+
+                <label for="registrationFirstName">
+                    <span>FirstName</span>
+                    <input
+                            type="text"
+                            name="firstName"
+                            id="registrationFirstName"
+                    />
+                </label>
+
+                <label for="registrationLastName">
+                    <span>LastName</span>
+                    <input
+                            type="text"
+                            name="lastName"
+                            id="registrationLastName"
+                    />
+                </label>
+
+                <label for="registrationEMail">
+                    <span>eMail</span>
+                    <input
+                            type="text"
+                            name="eMail"
+                            id="registrationEMail"
+                    />
+                </label>
+
+                <button class="btn" type="submit" value="Registration">Add</button>
+            </form>
+        </div>
+    </div>
+
+</main>
+
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>

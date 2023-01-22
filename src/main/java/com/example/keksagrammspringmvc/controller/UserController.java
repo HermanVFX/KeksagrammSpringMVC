@@ -25,7 +25,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     public String showUser(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("user", repository.findById(id));
+        model.addAttribute("user", repository.findById(id).get());
         return "user";
     }
 
@@ -55,5 +55,10 @@ public class UserController {
     public String saveUser(@ModelAttribute("user") User user) {
         repository.save(user);
         return "redirect:/";
+    }
+
+    @GetMapping("/login")
+    public String loginUser() {
+        return "login";
     }
 }
