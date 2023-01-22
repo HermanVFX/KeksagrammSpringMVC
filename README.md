@@ -7,10 +7,16 @@ CREATE TABLE IF NOT EXISTS app_user
 (
     id        SERIAL PRIMARY KEY,
     user_name VARCHAR(128) NOT NULL,
+    password  VARCHAR      NOT NULL,
     avatar    VARCHAR(255),
     f_name    VARCHAR(128) NOT NULL,
     l_name    VARCHAR(128) NOT NULL,
     e_mail    VARCHAR(128) NOT NULL
+);
+CREATE TABLE IF NOT EXISTS app_role
+(
+    id        SERIAL PRIMARY KEY,
+    role_name VARCHAR(128) NOT NULL
 );
 CREATE TABLE IF NOT EXISTS app_post
 (
@@ -18,7 +24,7 @@ CREATE TABLE IF NOT EXISTS app_post
     user_id   BIGINT REFERENCES app_user (id),
     post_head VARCHAR(128) NOT NULL,
     post_text VARCHAR(1024),
-    post_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    post_date TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 CREATE TABLE IF NOT EXISTS app_photo
 (
@@ -35,13 +41,26 @@ CREATE TABLE IF NOT EXISTS app_user_photos
 );
 CREATE TABLE IF NOT EXISTS app_user_posts
 (
-    id        SERIAL PRIMARY KEY,
+    id       SERIAL PRIMARY KEY,
     posts_id BIGINT REFERENCES app_post (id),
-    user_id   BIGINT REFERENCES app_user (id)
+    user_id  BIGINT REFERENCES app_user (id)
 );
-INSERT INTO app_user (user_name, avatar, f_name, l_name, e_mail)
-VALUES ('HermanVFX', DEFAULT, 'Herman', 'Makhiyanov', 'hermanvfx@outlook.com'),
-       ('Natashechka', 'avatar_woman_default.png', 'Natali', 'Shumakova', 'natashechka2000@outlook.com');
+CREATE TABLE IF NOT EXISTS app_user_roles
+(
+    id      SERIAL PRIMARY KEY,
+    role_id BIGINT REFERENCES app_role (id),
+    user_id BIGINT REFERENCES app_user (id)
+);
+INSERT INTO app_role (role_name)
+VALUES ('ROLE_USER'),
+       ('ROLE_ADMIN');
+INSERT INTO app_user (user_name, password, avatar, f_name, l_name, e_mail)
+VALUES ('HermanVFX', '$2a$12$dZBA.Jo/mTXL33s9.qxB0uTKFUSYZ9CElGgqEIToL1Oj3WEWCStIu', DEFAULT, 'Herman', 'Makhiyanov',
+        'hermanvfx@outlook.com'),
+       ('Natashechka', '$2a$12$dZBA.Jo/mTXL33s9.qxB0uTKFUSYZ9CElGgqEIToL1Oj3WEWCStIu', 'avatar_woman_default.png',
+        'Natali', 'Shumakova', 'natashechka2000@outlook.com'),
+       ('user', '$2a$12$dZBA.Jo/mTXL33s9.qxB0uTKFUSYZ9CElGgqEIToL1Oj3WEWCStIu', DEFAULT, 'user', 'user',
+        'user@outlook.com');
 
 INSERT INTO app_post (user_id, post_head, post_text)
 VALUES (1,
@@ -94,4 +113,8 @@ VALUES (1, 1),
 INSERT INTO app_user_posts (posts_id, user_id)
 VALUES (1, 1),
        (2, 1);
+INSERT INTO app_user_roles (role_id, user_id)
+VALUES (1, 1),
+       (2, 2),
+       (1, 3);
 ```
